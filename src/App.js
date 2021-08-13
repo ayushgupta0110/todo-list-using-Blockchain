@@ -1,25 +1,25 @@
-import './App.css';
-import Web3 from 'web3';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import "./App.css";
+import Web3 from "web3";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  const [account,setAccount] = useState("");
+  const [account, setAccount] = useState("");
 
-const loadBlockchainData = async() => {
-  const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  const network = await web3.eth.net.getNetworkType();
-  console.log('network:',network);
-  //fetch the account information
-  const accountInfo = await web3.eth.getAccounts();
-  console.log('accountInfo:',accountInfo);
-  //set the account
-  setAccount(accountInfo[0]);
-}
+  const loadBlockchainData = async () => {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
+    const network = await web3.eth.net.getNetworkType();
+    console.log("network:", network);
+    //fetch the account information
+    const accountInfo = await web3.eth.getAccounts();
+    console.log("accountInfo:", accountInfo);
+    //set the account
+    setAccount(accountInfo[0]);
+  };
 
-useEffect(() => {
-  loadBlockchainData();
-}, []);
+  useEffect(() => {
+    loadBlockchainData();
+  }, []);
 
   return (
     <div className="container">
